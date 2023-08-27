@@ -3,6 +3,7 @@ import Products from '../showcase/pages/Products'
 import Login from '../showcase/pages/Login'
 import Admin from '../admin/pages/Admin'
 import SignUp from '../showcase/pages/SignUp'
+import CreateProduct from '../admin/pages/CreateProduct'
 
 const Main = () => {
   return (
@@ -10,9 +11,12 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<Products />}></Route>
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/admin' element={<Admin />}></Route>
+        <Route path='/admin' element={<Admin />}>
+          <Route path='add' element={<CreateProduct/>}></Route>
+        </Route>
         <Route path='/signup' element={<SignUp />}></Route>
       </Routes>
+      
     </div>
   )
 }
