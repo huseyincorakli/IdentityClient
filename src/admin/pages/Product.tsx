@@ -1,24 +1,23 @@
-
-import {CustomToastifyContainer,MessageType,Position,ToastifyService } from "../../services/common/CustomToastifyService";
-import ProductList from "../components/ProductList"
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { useState } from 'react';
+import ProductList from '../components/ProductList'
+import 'react-toastify/dist/ReactToastify.css'
+import { ProductAddModal } from '../../modal/Product/ProductDeleteModal';
+import { Button } from '@mui/material';
+import { ProductDeleteModal } from '../../modal/Product/DeleteProductModal';
 
 const Product = () => {
- 
-const goster =()=>{
-  ToastifyService.notfy('s',MessageType.Success,{position:Position.TopCenter})
-}  
-  return (
-   <div>
-     <div className="bg-white mt-3 p-2 rounded-lg shadow-md mx-10">
-     <button onClick={goster}>Notify!</button>
-      <ProductList/>
+  
+  
 
-      <CustomToastifyContainer />
+ 
+ 
+  return (
+    <div>
+      
+      <div className='bg-white mt-3 p-2 rounded-lg shadow-md mx-10'>
+        <ProductList />
+      </div>
     </div>
-   </div>
   )
 }
 

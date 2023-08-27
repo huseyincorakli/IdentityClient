@@ -1,4 +1,24 @@
+import { useState } from "react";
+import { ProductAddModal } from "../../modal/Product/ProductDeleteModal"
+import { ProductDeleteModal } from "../../modal/Product/DeleteProductModal";
+
 const ProductList = () => {
+  const [isProductAddModalOpen, setProductAddModalOpen] = useState(false);
+  const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
+
+  const openDelete=()=>{
+    setIsDeleteProductModalOpen(true);
+  }
+  const closeDelete=()=>{
+    setIsDeleteProductModalOpen(false);
+  }
+  const openProductAddModal = () => {
+    setProductAddModalOpen(true);
+  };
+
+  const closeProductAddModal = () => {
+    setProductAddModalOpen(false);
+  };
   return (
     <div>
       <div className='overflow-x-auto'>
@@ -16,7 +36,7 @@ const ProductList = () => {
               </th>
               <th className='whitespace-nowrap px-4 py-2 font-medium text-gray-900'>
               <a
-                  href='#'
+                  onClick={openProductAddModal}
                   className='inline-block rounded bg-green-600 px-4 py-2 text-xs font-medium text-white hover:bg-green-700'
                 >
                   Add Product
@@ -39,7 +59,7 @@ const ProductList = () => {
               </td>
               <td className='whitespace-nowrap px-4 py-2 text-center'>
                 <a
-                  href='#'
+                onClick={openDelete}
                   className='inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700'
                 >
                   Delete
@@ -49,6 +69,8 @@ const ProductList = () => {
           </tbody>
         </table>
       </div>
+      <ProductAddModal open={isProductAddModalOpen} handleClose={closeProductAddModal} />
+      <ProductDeleteModal handleClose={closeDelete} open={isDeleteProductModalOpen} />
     </div>
   )
 }
