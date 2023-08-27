@@ -23,12 +23,14 @@ const Products = () => {
       
       {
         products.length>0 && products.map((product)=>(
-          <div key={product.id} className='h-32 mt-1 mb-1 rounded-lg bg-gray-100'>
+          <div key={product.id} className='h-32 mt-1 mb-1 rounded-lg bg-gray-100 shadow-md'>
+        <div className="p-2">
         <p>Name: {product.productName}</p>
         <br />
         <p>Stock: {product.stock}</p>
         <br />
         <p>Price: {product.price} $</p>
+        </div>
       </div>
         ))
       }

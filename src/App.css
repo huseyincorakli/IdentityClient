@@ -100,3 +100,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.active{
+  border:solid 2px #1450A3;
+  padding:4px;
+  border-radius:10px;
+  background-color:#1450A3;
+  color:#fff;
+}
