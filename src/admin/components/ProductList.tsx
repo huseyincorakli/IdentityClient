@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductAddModal } from "../../modal/Product/ProductDeleteModal"
 import { ProductDeleteModal } from "../../modal/Product/DeleteProductModal";
+import { HttpClientService } from "../../http/httpClientService";
 
 const ProductList = () => {
   const [isProductAddModalOpen, setProductAddModalOpen] = useState(false);
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
-
+ const [products,setProducst]=useState([]);
+ 
+ useEffect(()=>{
+  HttpClientService.get<Product[]>({
+    controller:'product'
+   },).then(response=>{
+   console.log(response);
+   
+     
+   })
+ },[])
+  
+  console.log(products);
+  
   const openDelete=()=>{
     setIsDeleteProductModalOpen(true);
   }

@@ -1,20 +1,32 @@
 import { useEffect, useState } from "react"
 import LoadingProducts from "../components/LoadingProducts";
+import { HttpClientService } from "../../http/httpClientService";
+
+// interface deneme {
+//   config:object;
+//   data:;
+
+// }
+
+/// !  BURADA KALDIM!
+
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading,setLoading]=useState<boolean>(true);
   useEffect(() => {
-    fetch('https://localhost:7194/api/Product')
-      .then(response => response.json())
-      .then((data: { products: Product[] }) => {
-        setProducts(data.products);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    HttpClientService.get<object>({
+      controller:'product'
+     },).then(response=>{
+     console.log(response);
+     
+      
+     setLoading(false)
+     })
   }, []);
+
+  console.log(products[0]);
+  
   if (loading) {
    return <LoadingProducts/>
   }
