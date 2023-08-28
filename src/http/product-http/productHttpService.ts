@@ -1,4 +1,5 @@
 import { Product } from "../../entity/product"
+import { MessageType, Position, ToastifyService } from "../../services/common/CustomToastifyService";
 import { HttpClientService } from "../httpClientService"
 interface Response<T> {
     data:Data<T>;
@@ -25,6 +26,12 @@ export const productHttpService={
         HttpClientService.post({
         controller:'product'
         },entity).then(response=>{
+            if (response) {
+                if (response.status==201) {
+                    ToastifyService.notfy('Ürün eklendi!',MessageType.Success,{position:Position.TopRight})
+                }
+                
+            }
             return response
         }).catch(err=>{
             return err;
