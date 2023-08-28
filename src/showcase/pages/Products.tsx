@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import LoadingProducts from '../components/LoadingProducts'
 import { Product } from '../../entity/product'
 import { productHttpService } from '../../http/product-http/productHttpService'
+import { useAuth } from '../../contexts/AuthContext'
 
 const Products = () => {
+  const {auth} =useAuth()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
@@ -12,11 +14,13 @@ const Products = () => {
     })
   }, [])
 
+  console.log(auth);
+  
   if (loading) {
     return <LoadingProducts />
   }
   return (
-    <div className='grid mx-2 my-2 grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8'>
+    <div className='grid lg:mx-20 mx-6 my-2 grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8'>
       {products.length > 0 &&
         products.map(product => (
           <div

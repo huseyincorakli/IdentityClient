@@ -6,10 +6,12 @@ import SignUp from '../showcase/pages/SignUp'
 import Product from '../admin/pages/Product'
 import User from '../admin/pages/User'
 import C_Auth from '../admin/pages/C_Auth'
+import { AuthProvider } from '../contexts/AuthContext'
 
 const Main = () => {
   return (
     <div className='min-h-[calc(100%-162px)]'>
+      
       <Routes>
         <Route path='/' element={<Products />}></Route>
         <Route path='/login' element={<Login />}></Route>

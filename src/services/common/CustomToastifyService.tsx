@@ -29,7 +29,8 @@ export enum Position{
 export enum MessageType {
   Success = 'success',
   Warning = 'warning',
-  Info = 'info'
+  Info = 'info',
+  Error='error'
 }
 
 export enum TimeoutDuration {

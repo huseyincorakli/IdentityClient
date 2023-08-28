@@ -1,7 +1,7 @@
 const SignUp = () => {
   return (
     <>
-    <section className='bg-white h-2/3'>
+    <section className='bg-white h-2/3 mx-6'>
         <div className='lg:grid lg:min-h-[calc(100%-30%)] lg:grid-cols-12'>
           <main className='flex items-center justify-center  xl:col-span-12'>
             <div className='max-w-xl lg:max-w-3xl'>

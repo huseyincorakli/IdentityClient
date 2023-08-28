@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
+import { useEffect } from 'react'
 
 const Header = () => {
+  const {token}=useAuth()
+  console.log('header:',token);
+  
+ 
   return (
     <>
       <header>
@@ -118,7 +124,8 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <div className='mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center'>
+            {
+              token ? <div className='mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center'>
               <NavLink
               
                 className='block cursor-pointer  rounded-lg bg-indigo-600 w-full h-full px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring'
@@ -126,7 +133,8 @@ const Header = () => {
               >
                 Dashboard
               </NavLink>
-            </div>
+            </div>:<div></div>
+            }
           </div>
         </div>
       </header>

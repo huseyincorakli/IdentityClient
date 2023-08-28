@@ -1,19 +1,30 @@
-import { useEffect } from 'react'
+import {  useEffect } from 'react'
 import { UserHttpService } from '../../http/user-http/userHttpService'
 import { userObjects } from '../../entity/userObject'
+import { useAuth } from '../../contexts/AuthContext'
+import { NavLink } from 'react-router-dom'
+
 
 const Login = () => {
-
-
+const {token,setToken}=useAuth()
+const newUser:userObjects= new userObjects()
+    newUser.userNameOrEmail='crklih';
+    newUser.password='123';
   useEffect(()=>{
-    const user:userObjects= new userObjects()
-    user.userNameOrEmail='crklih';
-    user.password='123';
-    UserHttpService.login(user)
-  },[])
+  
+     console.log('login',token);
+     
+  },[token])
+
+const login=async()=>{
+  await UserHttpService.login(newUser,()=>{
+    setToken('abc')
+   })
+}
 
   return (
     <>
+    <NavLink to={'/admin'}>Admin</NavLink>
       <div className='grid-cols-12 mx-4 mt-8'>
         <div className='flex items-center justify-center'>
           <div className=" grid-cols-3"></div>
@@ -43,7 +54,8 @@ const Login = () => {
             />
           </div>
           <button
-            type='submit'
+          onClick={login}
+            type='button'
             className='w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600'
           >
             Login

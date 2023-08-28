@@ -1,7 +1,19 @@
-import { Outlet } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
+import { useAuth } from '../../contexts/AuthContext'
+import { useEffect } from 'react'
 
 const Admin = () => {
+  const navigate = useNavigate()
+  const {token}= useAuth()
+  console.log(token);
+  
+  
+useEffect(()=>{
+  if(token==undefined && !token){
+    navigate('/login')
+  }
+},[token])
   return (
     <>
       <Sidebar />
