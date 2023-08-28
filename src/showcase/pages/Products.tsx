@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react"
 import LoadingProducts from "../components/LoadingProducts";
 import { HttpClientService } from "../../http/httpClientService";
+import { Product } from "../../entity/product";
 
-// interface deneme {
-//   config:object;
-//   data:;
-
-// }
-
-/// !  BURADA KALDIM!
+interface Response<T> {
+  data:Data<T>;
+  status:number;
+}
+interface Data<T> {
+  products:T[]
+}
 
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading,setLoading]=useState<boolean>(true);
   useEffect(() => {
-    HttpClientService.get<object>({
+    HttpClientService.get<Response<Product>>({
       controller:'product'
      },).then(response=>{
-     console.log(response);
      
+     setProducts(response.data.products)
       
      setLoading(false)
      })

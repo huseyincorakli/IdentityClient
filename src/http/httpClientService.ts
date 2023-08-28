@@ -16,6 +16,16 @@ export const HttpClientService = {
             url = `${this.url(requestParameters)}${id ? `?id=${id}` : ''}${requestParameters.queryString ? `/${requestParameters.queryString}` : ''}`;
             return  axios.get(url, { headers: requestParameters.headers })
         }
+    },
+    async post<T>(requestParameters:Partial<RequestParameters>,body):Promise<T>{
+        let url: string = '';
+        if (requestParameters.fullEndPoint) {
+            url = requestParameters.fullEndPoint
+        }
+        else {
+            url = `${this.url(requestParameters)}${requestParameters.queryString ? `/${requestParameters.queryString}` : ''}`;
+            return  axios.post(url,body, { headers: requestParameters.headers})
+        }
     }
 }
 

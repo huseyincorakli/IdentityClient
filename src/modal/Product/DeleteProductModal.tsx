@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import BaseModal from "../BaseModal";
 
-export const ProductDeleteModal = ({ open, handleClose }) => {
+export const ProductDeleteModal = ({ open, handleClose,product }) => {
     const handleProductDelete = () => {
       handleClose();
     };
@@ -13,7 +13,7 @@ export const ProductDeleteModal = ({ open, handleClose }) => {
         title="Uyarı"
         content={
           <div>
-            <p>Ürünü silmek istediğinizden emin misiniz?</p>
+            <p>{product && product.productName} silmek istediğinizden emin misiniz?</p>
             <Button onClick={handleProductDelete}>Sil</Button>
           </div>
         }

@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
-import { ProductAddModal } from "../../modal/Product/ProductDeleteModal"
+import { ProductAddModal } from "../../modal/Product/ProductAddModal"
 import { ProductDeleteModal } from "../../modal/Product/DeleteProductModal";
-import { HttpClientService } from "../../http/httpClientService";
+import { Product } from "../../entity/product";
+import { productHttpService } from "../../http/product-http/productHttpService";
 
 const ProductList = () => {
   const [isProductAddModalOpen, setProductAddModalOpen] = useState(false);
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
- const [products,setProducst]=useState([]);
- 
+  const [products,setProducst]=useState<Product[]>([]);
+  const[selectedProduct,setSelectedProduct]= useState<Product>(null);
  useEffect(()=>{
-  HttpClientService.get<Product[]>({
-    controller:'product'
-   },).then(response=>{
-   console.log(response);
-   
-     
-   })
+  productHttpService.read(setProducst)
  },[])
   
-  console.log(products);
+
   
-  const openDelete=()=>{
+  const openDelete=(product)=>{
+    console.log(product);
+    setSelectedProduct(product)
+    
+
     setIsDeleteProductModalOpen(true);
   }
-  const closeDelete=()=>{
+
+  
+  const closeDelete=()=>{ 
     setIsDeleteProductModalOpen(false);
   }
   const openProductAddModal = () => {
@@ -61,30 +62,34 @@ const ProductList = () => {
           </thead>
 
           <tbody className='divide-y divide-gray-200'>
-            <tr>
+            {
+              products.length>0 && products.map((product)=>(
+                <tr key={product.id}>
               <td className='whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-center'>
-                John Doe
+                {product.productName}
               </td>
               <td className='whitespace-nowrap px-4 py-2 text-gray-700 text-center'>
-                $120,000
+                {product.stock}
               </td>
               <td className='whitespace-nowrap px-4 py-2 text-gray-700 text-center'>
-                $120,000
+                ${product.price}
               </td>
               <td className='whitespace-nowrap px-4 py-2 text-center'>
                 <a
-                onClick={openDelete}
+                onClick={()=>{openDelete(product)}}
                   className='inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700'
                 >
                   Delete
                 </a>
               </td>
             </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
-      <ProductAddModal open={isProductAddModalOpen} handleClose={closeProductAddModal} />
-      <ProductDeleteModal handleClose={closeDelete} open={isDeleteProductModalOpen} />
+      <ProductAddModal setProduct={setProducst} open={isProductAddModalOpen} handleClose={closeProductAddModal} />
+      <ProductDeleteModal product={selectedProduct} handleClose={closeDelete} open={isDeleteProductModalOpen} />
     </div>
   )
 }
