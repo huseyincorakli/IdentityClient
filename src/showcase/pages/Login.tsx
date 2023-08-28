@@ -1,6 +1,17 @@
-import SignUp from './SignUp'
+import { useEffect } from 'react'
+import { UserHttpService } from '../../http/user-http/userHttpService'
+import { userObjects } from '../../entity/userObject'
 
 const Login = () => {
+
+
+  useEffect(()=>{
+    const user:userObjects= new userObjects()
+    user.userNameOrEmail='crklih';
+    user.password='123';
+    UserHttpService.login(user)
+  },[])
+
   return (
     <>
       <div className='grid-cols-12 mx-4 mt-8'>

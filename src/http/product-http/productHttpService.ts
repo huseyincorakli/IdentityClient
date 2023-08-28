@@ -10,8 +10,8 @@ interface Response<T> {
   }
 export const productHttpService={
     
-    read(  setState:React.Dispatch<React.SetStateAction<Product[]>>,callBack?:()=>void){
-        HttpClientService.get<Response<Product>>({
+   async read(  setState:React.Dispatch<React.SetStateAction<Product[]>>,callBack?:()=>void){
+       await HttpClientService.get<Response<Product>>({
             controller:'product'
         }).then(response=>{
             setState(response.data.products)
@@ -22,8 +22,8 @@ export const productHttpService={
             callBack();
         }
     },
-    create(entity:Product,callBack?:()=>void){
-        HttpClientService.post({
+    async create(entity:Product,callBack?:()=>void){
+        await HttpClientService.post<Response<Product>>({
         controller:'product'
         },entity).then(response=>{
             if (response) {

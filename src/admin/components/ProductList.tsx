@@ -3,14 +3,18 @@ import { ProductAddModal } from "../../modal/Product/ProductAddModal"
 import { ProductDeleteModal } from "../../modal/Product/DeleteProductModal";
 import { Product } from "../../entity/product";
 import { productHttpService } from "../../http/product-http/productHttpService";
+import LoadingProductList from "../../showcase/components/LoadingProductList";
 
 const ProductList = () => {
   const [isProductAddModalOpen, setProductAddModalOpen] = useState(false);
   const [isDeleteProductModalOpen,setIsDeleteProductModalOpen]=useState(false);
   const [products,setProducst]=useState<Product[]>([]);
   const[selectedProduct,setSelectedProduct]= useState<Product>(null);
+  const [loading,setLoading]=useState(true);
  useEffect(()=>{
-  productHttpService.read(setProducst)
+  productHttpService.read(setProducst,()=>{
+    setLoading(false)
+  })
  },[])
   
 
@@ -34,6 +38,9 @@ const ProductList = () => {
   const closeProductAddModal = () => {
     setProductAddModalOpen(false);
   };
+  if (loading) {
+    return <LoadingProductList/>
+  }
   return (
     <div>
       <div className='overflow-x-auto'>
